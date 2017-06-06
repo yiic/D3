@@ -1,0 +1,60 @@
+<!-- Author: Yirong Chen Date:5/26/2017 -->
+
+<!doctype html>
+<html>
+
+<head>
+	<title>random circle</title>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+
+    <p>To get circles, please click on the screen.</p>
+
+	<script>
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+		var canvas = d3.select("body").append("svg")
+			.attr("width",width)
+			.attr("height",height);
+    
+    	function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+    	}
+
+        function randomcolor1(){
+            return "#" + Math.random().toString(16).slice(2, 8) + "";
+        }
+
+        function randomcolor2() { 
+            return "hsl(" + Math.random() * 360 + ", 100%, 75%)" }
+    
+    	function drawCircle(x, y, size) {
+       		console.log('Drawing circle at', x, y, size);
+        	canvas.append("circle")
+            	.attr('class', 'click-circle')
+            	.attr("cx", x)
+            	.attr("cy", y)
+            	.attr("r", size)
+            	.attr("fill", randomcolor2() )
+                .style("stroke", "black")
+                .style("stroke-width", 1);
+    	}
+
+    
+    	canvas.on('click', function() {
+        	var coords = d3.mouse(this);
+        	console.log(coords);
+        	drawCircle(coords[0], coords[1], getRandom(5,50));
+   		});
+
+   
+
+	</script>
+	
+</body>
+
+
+</html>
